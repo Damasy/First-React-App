@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import styles from "./App.module.css";
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -46,20 +46,9 @@ class App extends Component {
 	};
 
   render() {
-    const style = {
-      backgroundColor: "#61DAFB",
-      font: "16px",
-      color: "#00f",
-      border: "none",
-      boxShadow: "0 0 2px rgba(0,0,0, 0.4)",
-      height: "40px",
-      cursor: "pointer",
-      margin: "10px auto",
-      padding: "10px",
-      borderRadius: "4px"
-    };
 
     let persons = null;
+    let activeClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -77,7 +66,7 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = '#ff0';
+      activeClass = styles.blue;
     }
 
     let classes = [];
@@ -89,21 +78,21 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <div className={styles.App}>
+        <header className={styles['App-header']}>
+          <img src={logo} className={styles["App-logo"]} alt="logo" />
           <p className={classes.join(' ')}>
             Edit <code>src/App.js</code> and save to reload.
           </p>
           <a
-            className="App-link"
+            className={styles["App-link"]}
             href="https://reactjs.org"
             target="_blank"
             rel="noopener noreferrer"
           >
             Learn React
           </a>
-          <button style={style} onClick={this.showPersonsHandler}>
+          <button className={activeClass} onClick={this.showPersonsHandler}>
             Toggle Persons
           </button>
 
