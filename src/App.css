@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.react-color {
+  color: #61DAFB;
+}
+
+.bold {
+  font-weight: bold;
+}

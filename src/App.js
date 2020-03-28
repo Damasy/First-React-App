@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Person from "./Person/Person";
+import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
   state = {
@@ -49,14 +50,20 @@ class App extends Component {
     const style = {
       backgroundColor: "#61DAFB",
       font: "16px",
-      color: "#000",
+      color: "#00f",
       border: "none",
       boxShadow: "0 0 2px rgba(0,0,0, 0.4)",
       height: "40px",
       cursor: "pointer",
       margin: "10px auto",
       padding: "10px",
-      borderRadius: "4px"
+      borderRadius: "4px",
+      transition: 'all 0.4s ease-in-out',
+      ':hover': {
+        backgroundColor: '#0f0',
+        color: '#000',
+        transition: 'all 0.4s ease-in-out',
+      }
     };
 
     let persons = null;
@@ -76,32 +83,49 @@ class App extends Component {
             })}
         </div>
       );
+
+      style.backgroundColor = '#ff0';
+      style[':hover'] = {
+        backgroundColor: '#00f',
+        color: '#fff',
+        transition: 'all 0.4s ease-in-out',
+      }
+    }
+
+    let classes = [];
+    if(this.state.persons <= 2) {
+      classes.push('bold');
+    }
+    if(this.state.persons <= 1) {
+      classes.push('react-color')
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <button style={style} onClick={this.showPersonsHandler}>
-            Toggle Persons
-          </button>
+      <StyleRoot>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <p className={classes.join(' ')}>
+              Edit <code>src/App.js</code> and save to reload.
+            </p>
+            <a
+              className="App-link"
+              href="https://reactjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn React
+            </a>
+            <button style={style} onClick={this.showPersonsHandler}>
+              Toggle Persons
+            </button>
 
-          {persons}
-        </header>
-      </div>
+            {persons}
+          </header>
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);

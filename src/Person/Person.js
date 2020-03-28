@@ -1,9 +1,15 @@
 import React from "react";
-import './Person.css'
+import './Person.css';
+import Radium from 'radium';
 
 const person = params => {
+  const style = {
+    '@media (min-width: 500px)': {
+      width: '450px'
+    }
+  }
   return (
-    <div className="Person">
+    <div style={style} className="Person">
       <p onClick={params.delete}>
         I'm {params.name} ! and I'm {params.age} years old, {params.children}
       </p>
@@ -12,4 +18,4 @@ const person = params => {
   );
 };
 
-export default person;
+export default Radium(person);
