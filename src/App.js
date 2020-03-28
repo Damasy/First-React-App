@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import styles from "./App.module.css";
 import Person from "./Person/Person";
+// import ErrorBoundary from "./ErrorBoundary";
 
 class App extends Component {
   state = {
     persons: [
-      { id: 'asddsa', name: "a.damasy", age: 27 },
-      { id: 'asdzxc', name: "Doc.damasy", age: 31 },
-      { id: 'asdqwe', name: "Mah.damasy", age: 30 }
+      { id: "asddsa", name: "a.damasy", age: 27 },
+      { id: "asdzxc", name: "Doc.damasy", age: 31 },
+      { id: "asdqwe", name: "Mah.damasy", age: 30 }
     ],
     showPersons: false
   };
@@ -27,42 +28,45 @@ class App extends Component {
     const persons = [...this.state.persons];
 
     persons.map(p => {
-      if(p.id === id) p.name = event.target.value;
+      if (p.id === id) p.name = event.target.value;
       return p;
-    })
-    
+    });
+
     this.setState({
-      persons: persons});
+      persons: persons
+    });
   };
 
   showPersonsHandler = () => {
-    this.setState({showPersons: !this.state.showPersons})
-  }
+    this.setState({ showPersons: !this.state.showPersons });
+  };
 
-  deletePersonHandler = (index) => {
+  deletePersonHandler = index => {
     const persons = [...this.state.persons];
     persons.splice(index, 1);
-		this.setState({persons: persons});
-	};
+    this.setState({ persons: persons });
+  };
 
   render() {
-
     let persons = null;
-    let activeClass = '';
+    let activeClass = "";
 
     if (this.state.showPersons) {
       persons = (
         <div>
-            {this.state.persons.map((person, index) => {
-                return <Person
-										name={person.name}
-										age={person.age}
-										key={person.id}
-										delete={() => this.deletePersonHandler(index)}
-										handler={(event) => this.nameChangeHandler(event, person.id)}
-									>
-									</Person>
-            })}
+          {this.state.persons.map((person, index) => {
+            return (
+              // <ErrorBoundary key={person.id}>
+                <Person
+                  name={person.name}
+                  age={person.age}
+                  key={person.id}
+                  delete={() => this.deletePersonHandler(index)}
+                  handler={event => this.nameChangeHandler(event, person.id)}
+                ></Person>
+              // </ErrorBoundary>
+            );
+          })}
         </div>
       );
 
@@ -70,18 +74,18 @@ class App extends Component {
     }
 
     let classes = [];
-    if(this.state.persons <= 2) {
-      classes.push('bold');
+    if (this.state.persons <= 2) {
+      classes.push("bold");
     }
-    if(this.state.persons <= 1) {
-      classes.push('react-color')
+    if (this.state.persons <= 1) {
+      classes.push("react-color");
     }
 
     return (
       <div className={styles.App}>
-        <header className={styles['App-header']}>
+        <header className={styles["App-header"]}>
           <img src={logo} className={styles["App-logo"]} alt="logo" />
-          <p className={classes.join(' ')}>
+          <p className={classes.join(" ")}>
             Edit <code>src/App.js</code> and save to reload.
           </p>
           <a
