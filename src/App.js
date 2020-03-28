@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import styles from "./App.module.css";
 import Person from "./Person/Person";
-// import ErrorBoundary from "./ErrorBoundary";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 class App extends Component {
   state = {
@@ -56,15 +56,15 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              // <ErrorBoundary key={person.id}>
+              <ErrorBoundary key={person.id}>
                 <Person
                   name={person.name}
                   age={person.age}
-                  key={person.id}
+                  // key={person.id}
                   delete={() => this.deletePersonHandler(index)}
                   handler={event => this.nameChangeHandler(event, person.id)}
                 ></Person>
-              // </ErrorBoundary>
+              </ErrorBoundary>
             );
           })}
         </div>
