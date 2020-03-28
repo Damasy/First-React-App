@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
   state = {
@@ -57,13 +56,7 @@ class App extends Component {
       cursor: "pointer",
       margin: "10px auto",
       padding: "10px",
-      borderRadius: "4px",
-      transition: 'all 0.4s ease-in-out',
-      ':hover': {
-        backgroundColor: '#0f0',
-        color: '#000',
-        transition: 'all 0.4s ease-in-out',
-      }
+      borderRadius: "4px"
     };
 
     let persons = null;
@@ -85,11 +78,6 @@ class App extends Component {
       );
 
       style.backgroundColor = '#ff0';
-      style[':hover'] = {
-        backgroundColor: '#00f',
-        color: '#fff',
-        transition: 'all 0.4s ease-in-out',
-      }
     }
 
     let classes = [];
@@ -101,31 +89,29 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p className={classes.join(' ')}>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-            <button style={style} onClick={this.showPersonsHandler}>
-              Toggle Persons
-            </button>
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p className={classes.join(' ')}>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+          <button style={style} onClick={this.showPersonsHandler}>
+            Toggle Persons
+          </button>
 
-            {persons}
-          </header>
-        </div>
-      </StyleRoot>
+          {persons}
+        </header>
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
