@@ -1,10 +1,38 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import logo from "../logo.svg";
 import styles from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 
-class App extends Component {
+class App extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside component constructor', props)
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside component willMount')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside component didMount')
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[App.js] Inside component shouldComponentUpdate', nextProps, nextState);
+  //   return this.state.persons !== nextProps.persons ||
+  //           this.state.showPersons !== nextProps.showPersons;
+  // }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[App.js] Inside component componentWillUpdate', nextProps, nextState)
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    console.log('[App.js] Inside component componentDidUpdate', nextProps, nextState)
+  }
+
   state = {
     persons: [
       { id: "asddsa", name: "a.damasy", age: 27 },
@@ -48,6 +76,8 @@ class App extends Component {
   };
 
   render() {
+
+    console.log('[App.js] Inside component Render')
     let persons = null;
 
     if (this.state.showPersons) {
@@ -73,6 +103,7 @@ class App extends Component {
     return (
       <div className={styles.App}>
         <header className={styles["App-header"]}>
+          <button onClick={() => this.setState({showPersons: true})}>Show Persons</button>
           <img src={logo} className={styles["App-logo"]} alt="logo" />
           <p className={classes.join(" ")}>
             Edit <code>src/App.js</code> and save to reload.
