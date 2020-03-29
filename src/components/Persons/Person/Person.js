@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes, { number, string } from 'prop-types';
 import styles from './Person.module.css';
 import Aux from '../../../hoc/Hoc';
 import WithClass from '../../../hoc/WithClass';
@@ -14,7 +15,8 @@ class Person extends Component {
   }
 
   componentDidMount() {
-    console.log('[Person.js] Inside component didMount')
+    console.log('[Person.js] Inside component didMount');
+    if(this.props.position === 0) this.inputElement.focus();
   }
 
   render () {
@@ -25,10 +27,21 @@ class Person extends Component {
         <p onClick={this.props.delete}>
           I'm {this.props.name} ! and I'm {this.props.age} years old, {this.props.children}
         </p>
-        <input type="text" onChange={this.props.handler} value={this.props.name}/>
+        <input 
+        ref = {(inp) => {this.inputElement = inp}}
+        type="text" 
+        onChange={this.props.handler} 
+        value={this.props.name}/>
       </Aux>
     );
   }
+}
+
+Person.propTypes = {
+  handler: PropTypes.func,
+  age: PropTypes.number,
+  name: PropTypes.string,
+  delete: PropTypes.func
 }
 
 export default WithClass(Person, styles.Person);

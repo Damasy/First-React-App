@@ -44,6 +44,7 @@ class Persons extends PureComponent {
             name={person.name}
             age={person.age}
             key={person.id}
+            position = {index}
             delete={() => this.props.clicked(index)}
             handler={event => this.props.changed(event, person.id)}
           ></Person>
