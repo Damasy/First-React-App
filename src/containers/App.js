@@ -1,8 +1,8 @@
-import React, { Component } from "./node_modules/react";
+import React, { Component } from "react";
 import logo from "../logo.svg";
 import styles from "./App.module.css";
-import Person from "../components/Persons/Person/Person";
-import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   state = {
@@ -49,36 +49,25 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let activeClass = "";
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <ErrorBoundary key={person.id}>
-                <Person
-                  name={person.name}
-                  age={person.age}
-                  // key={person.id}
-                  delete={() => this.deletePersonHandler(index)}
-                  handler={event => this.nameChangeHandler(event, person.id)}
-                ></Person>
-              </ErrorBoundary>
-            );
-          })}
-        </div>
-      );
-
-      activeClass = styles.blue;
+      persons = 
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+        ></Persons>
     }
 
     let classes = [];
-    if (this.state.persons <= 2) {
-      classes.push("bold");
+    if (this.state.persons.length <= 2) {
+      classes.push(styles.bold);
     }
-    if (this.state.persons <= 1) {
-      classes.push("react-color");
+    if (this.state.persons.length <= 1) {
+      classes.push(styles["react-color"]);
+    }
+    if(!this.state.persons.length) {
+      classes = [];
     }
 
     return (
@@ -96,10 +85,11 @@ class App extends Component {
           >
             Learn React
           </a>
-          <button className={activeClass} onClick={this.showPersonsHandler}>
-            Toggle Persons
-          </button>
-
+          <Cockpit
+            showPersons={this.state.showPersons}
+            handler={this.showPersonsHandler}
+          ></Cockpit>
+          
           {persons}
         </header>
       </div>
