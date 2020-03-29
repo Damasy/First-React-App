@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes, { number, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './Person.module.css';
 import Aux from '../../../hoc/Hoc';
 import WithClass from '../../../hoc/WithClass';
