@@ -1,5 +1,6 @@
 import React from 'react';
 import Styles from './Cockpit.module.css';
+import WithClasses from '../../hoc/WithClasses';
 
 
 const Cockpit = (props) => {
@@ -11,11 +12,11 @@ const Cockpit = (props) => {
   }
   
   return (
-    <div className={Styles.Cockpit}>
+    <WithClasses classes={Styles.Cockpit}>
       <button className={activeClass} onClick={props.handler}>
         Toggle Persons
       </button>
-    </div>
+    </WithClasses>
   );
 }
 

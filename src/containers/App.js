@@ -3,6 +3,8 @@ import logo from "../logo.svg";
 import styles from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import Aux from "../hoc/Hoc";
+import WithClass from "../hoc/WithClass";
 
 class App extends PureComponent {
 
@@ -101,7 +103,7 @@ class App extends PureComponent {
     }
 
     return (
-      <div className={styles.App}>
+      <Aux>
         <header className={styles["App-header"]}>
           <button onClick={() => this.setState({showPersons: true})}>Show Persons</button>
           <img src={logo} className={styles["App-logo"]} alt="logo" />
@@ -123,9 +125,9 @@ class App extends PureComponent {
           
           {persons}
         </header>
-      </div>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default WithClass(App, styles.App);
